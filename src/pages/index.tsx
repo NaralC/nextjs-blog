@@ -4,17 +4,34 @@ import Date from "../../components/date";
 import utilStyles from "../styles/utils.module.css";
 import Layout, { siteTitle } from "../../components/layout";
 import { getSortedPostsData } from "../../lib/posts";
+import { GetStaticProps } from "next";
+import { useEffect, useRef } from "react";
 
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-}
+export default function Home({
+  allPostsData,
+}: {
+  allPostsData: {
+    date: string;
+    title: string;
+    id: string;
+  }[];
+}) {
 
-export default function Home({ allPostsData }: any) {
+  const effectRan = useRef(false);
+  useEffect(() => {
+    const fetchHello = async () => {
+      await fetch("http://localhost:3000/api/hello")
+        .then((res) => {
+          console.log(res);
+        })
+        .catch();
+    };
+
+    if (!effectRan.current) fetchHello();
+
+    return () => { effectRan.current = true; }
+  }, []);
+
   return (
     <Layout home>
       <Head>
@@ -44,3 +61,12 @@ export default function Home({ allPostsData }: any) {
     </Layout>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+};
