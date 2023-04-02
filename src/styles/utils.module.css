@@ -1,0 +1,31 @@
+.heading2Xl {
+    @apply text-4xl font-extrabold leading-5 m-4
+}
+
+.headingXl {
+    @apply text-3xl font-extrabold leading-5 m-4
+}
+
+.headingLg {
+    @apply text-2xl leading-5 m-4
+}
+
+.headingMd {
+    @apply text-xl leading-10
+}
+
+.borderCircle {
+    @apply rounded-full
+}
+
+.list {
+    @apply list-none p-0 m-0
+}
+
+.listItem {
+    @apply mb-5
+}
+
+.lightText {
+    @apply text-red-700
+}
